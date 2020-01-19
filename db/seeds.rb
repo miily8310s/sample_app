@@ -16,4 +16,11 @@ User.create!(name:  name,
       password_confirmation: password,
       activated: true,
       activated_at: Time.zone.now)
-  end
+end
+
+users = User.order(:created_at).take(6)
+50.times do
+　#sentenceは単語数指定用にword_countが必要になった
+  content = Faker::Lorem.sentence(word_count: 5)
+  users.each { |user| user.microposts.create!(content: content) }
+end
